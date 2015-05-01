@@ -18,6 +18,7 @@ public class GameScreen extends State {
 
 	ShapeRenderer sr;
 	ArrayList<Rectangle> G_ArrayRect;
+	ArrayList<Color> ArrayColor = new ArrayList<Color>();
 
 	public GameScreen(GSM p_Gsm){
 		super(p_Gsm);
@@ -28,7 +29,6 @@ public class GameScreen extends State {
 
 	public void initRectangle(){
 		// Construction de base
-		ArrayList<Color> ArrayColor = new ArrayList<Color>();
 		ArrayColor.add(Color.BLUE);
 		ArrayColor.add(Color.GREEN);
 		ArrayColor.add(Color.YELLOW);
@@ -76,7 +76,7 @@ public class GameScreen extends State {
 
 		if(!G_ArrayRect.get(G_ArrayRect.size()-1).isDansLeVide()){
 			for(Rectangle r : G_ArrayRect){
-				r.effondrement();
+				r.setY(r.getY() - 1);
 				if(G_ArrayRect.get(1).getY() == 0){
 					G_ArrayRect.remove(0);
 					break;
