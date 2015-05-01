@@ -88,7 +88,6 @@ public class GameScreen extends State {
 				{
 					G_ArrayRect.get(i).setDansLeVide(false);
 					G_ArrayRect.get(G_ArrayRect.size()-1).setY(G_ArrayRect.get(i-1).getY() + G_ArrayRect.get(i-1).getHeight());
-					break;
 				}
 			}
 		}
@@ -101,6 +100,9 @@ public class GameScreen extends State {
 			for(Rectangle r : G_ArrayRect){
 				r.setY(r.getY() - 4);
 				if(G_ArrayRect.get(1).getY() == 0){
+					for(int j = 2; j < G_ArrayRect.size(); j++){
+						G_ArrayRect.get(j).setY(G_ArrayRect.get(j).getY() - 4);
+					}
 					G_ArrayRect.remove(0);
 					break;
 				}
