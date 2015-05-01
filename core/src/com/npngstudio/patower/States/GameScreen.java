@@ -71,6 +71,7 @@ public class GameScreen extends State {
 	public void handleInput() {
 		if(Gdx.input.justTouched()){
 			G_ArrayRect.get(G_ArrayRect.size()-1).setDansLeVide(true);
+			RandDirection = 3;
 		}
 	}
 	
