@@ -1,5 +1,6 @@
 package com.npngstudio.patower.States;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -23,8 +24,13 @@ public class GameScreen extends State {
 	}
 
 	public void initRectangle(){
-		Rectangle r1 = new Rectangle(160, 0, 160, 80);
-		G_ArrayRect.add(r1);
+		// Construction de base
+		/*for (int i = 0; i <= 5; i++)
+		{
+			G_ArrayRect.add(new Rectangle(160, i * 80, 160, 80));
+		}*/
+		G_ArrayRect.add(new Rectangle(160, 200, 160, 80));
+
 	}
 	
 	public void handleInput() {
@@ -33,6 +39,7 @@ public class GameScreen extends State {
 	
 	public void update(float p_DelTem) {
 		handleInput();
+
 	}
 
 	public void render(SpriteBatch p_SprBat) {
@@ -45,6 +52,7 @@ public class GameScreen extends State {
 		sr.setColor(Color.RED);
 
 		for(Rectangle rec : G_ArrayRect) {
+			rec.update();
 			sr.rect(rec.getX(), rec.getY(), rec.getWidth(), rec.getHeight());
 		}
 

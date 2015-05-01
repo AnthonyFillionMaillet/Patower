@@ -18,7 +18,11 @@ public class Rectangle {
     }
 
     public void update(){
+        if(y > 0)
+        {
+            this.y--;
 
+        }
     }
 
     public int getX() {
