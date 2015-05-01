@@ -22,6 +22,7 @@ public class GameScreen extends State {
 	final int DROITE = 0;
 	final int GAUCHE = 1;
 	int RandDirection;
+	int vitesse = 16;
 
 	public GameScreen(GSM p_Gsm){
 		super(p_Gsm);
@@ -112,10 +113,10 @@ public class GameScreen extends State {
 
 		if(!G_ArrayRect.get(G_ArrayRect.size()-1).isDansLeVide() && G_ArrayRect.get(G_ArrayRect.size()-1).getY() < 650){
 			for(Rectangle r : G_ArrayRect){
-				r.setY(r.getY() - 4);
+				r.setY(r.getY() - vitesse / 2);
 				if(G_ArrayRect.get(1).getY() == 0){
 					for(int j = 2; j < G_ArrayRect.size(); j++){
-						G_ArrayRect.get(j).setY(G_ArrayRect.get(j).getY() - 4);
+						G_ArrayRect.get(j).setY(G_ArrayRect.get(j).getY() - vitesse / 2);
 					}
 					G_ArrayRect.remove(0);
 					break;
@@ -125,10 +126,10 @@ public class GameScreen extends State {
 		}
 
 		if(RandDirection == GAUCHE){
-			G_ArrayRect.get(G_ArrayRect.size()-1).setX(G_ArrayRect.get(G_ArrayRect.size()-1).getX() + 8);
+			G_ArrayRect.get(G_ArrayRect.size()-1).setX(G_ArrayRect.get(G_ArrayRect.size()-1).getX() + vitesse);
 		}
 		else if (RandDirection == DROITE){
-			G_ArrayRect.get(G_ArrayRect.size()-1).setX(G_ArrayRect.get(G_ArrayRect.size()-1).getX() - 8);
+			G_ArrayRect.get(G_ArrayRect.size()-1).setX(G_ArrayRect.get(G_ArrayRect.size()-1).getX() - vitesse);
 		}
 	}
 
