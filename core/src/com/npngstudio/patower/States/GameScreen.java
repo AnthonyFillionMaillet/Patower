@@ -5,10 +5,10 @@ import com.npngstudio.patower.StatesManager.GSM;
 import com.npngstudio.patower.StatesManager.State;
 
 
-public class GameCoreState extends State {
+public class GameScreen extends State {
 	
 
-	public GameCoreState(GSM p_Gsm){
+	public GameScreen(GSM p_Gsm){
 		super(p_Gsm);
 
 	}
