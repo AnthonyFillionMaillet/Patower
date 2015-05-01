@@ -61,8 +61,15 @@ public class GameScreen extends State {
 		//INTERSECT
 		for(int i = 0; i < G_ArrayRect.size(); i++) {
 			if(G_ArrayRect.get(i-1) != null) {
-				if (G_ArrayRect.get(i).getX() + G_ArrayRect.get(i).getHeight() < G_ArrayRect.get(i-1).getX() + G_ArrayRect.get(i-1).getWidth() &&
-						)
+				if (G_ArrayRect.get(i).getX() + G_ArrayRect.get(i).getHeight() < G_ArrayRect.get(i-1).getX() + G_ArrayRect.get(i-1).getWidth()
+						&& G_ArrayRect.get(i).getX() + G_ArrayRect.get(i).getWidth() > G_ArrayRect.get(i-1).getX() + G_ArrayRect.get(i-1).getHeight()
+						&& G_ArrayRect.get(i).getY() + G_ArrayRect.get(i).getHeight() < G_ArrayRect.get(i-1).getY() + G_ArrayRect.get(i-1).getWidth())
+				{
+					if(G_ArrayRect.get(i).getY() + G_ArrayRect.get(i).getWidth() > G_ArrayRect.get(i-1).getY() + G_ArrayRect.get(i-1).getHeight())
+					{
+						G_ArrayRect.get(i).setDansLeVide(false);
+					}
+				}
 			}
 		}
 

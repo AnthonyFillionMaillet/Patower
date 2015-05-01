@@ -55,4 +55,9 @@ public class Rectangle {
         return color;
     }
 
+    public void setDansLeVide(boolean dansLeVide) {
+        this.dansLeVide = dansLeVide;
+    }
+
+
 }
