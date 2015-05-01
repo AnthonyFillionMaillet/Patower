@@ -25,11 +25,18 @@ public class GameScreen extends State {
 
 	public void initRectangle(){
 		// Construction de base
-		/*for (int i = 0; i <= 5; i++)
+		ArrayList<Color> ArrayColor = new ArrayList<Color>();
+		ArrayColor.add(Color.BLUE);
+		ArrayColor.add(Color.GREEN);
+		ArrayColor.add(Color.YELLOW);
+		ArrayColor.add(Color.RED);
+		ArrayColor.add(Color.MAGENTA);
+
+		for (int i = 0; i <= 5; i++)
 		{
-			G_ArrayRect.add(new Rectangle(160, i * 80, 160, 80));
-		}*/
-		G_ArrayRect.add(new Rectangle(160, 200, 160, 80));
+			int random = 0 + (int)(Math.random()*5);
+			G_ArrayRect.add(new Rectangle(160, i * 80, 160, 80, ArrayColor.get(random)));
+		}
 
 	}
 	
@@ -49,10 +56,11 @@ public class GameScreen extends State {
 
 
 		sr.begin(ShapeRenderer.ShapeType.Filled);
-		sr.setColor(Color.RED);
+
 
 		for(Rectangle rec : G_ArrayRect) {
 			rec.update();
+			sr.setColor(rec.getColor());
 			sr.rect(rec.getX(), rec.getY(), rec.getWidth(), rec.getHeight());
 		}
 
