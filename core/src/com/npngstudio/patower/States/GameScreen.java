@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.utils.Timer;
 import com.npngstudio.patower.Model.Rectangle;
 import com.npngstudio.patower.StatesManager.GSM;
 import com.npngstudio.patower.StatesManager.State;
@@ -23,6 +24,13 @@ public class GameScreen extends State {
 		sr = new ShapeRenderer();
 		G_ArrayRect = new ArrayList<Rectangle>();
 		initRectangle();
+
+		Timer.schedule(new Timer.Task() {
+			@Override
+			public void run() {
+				spawnRectangle();
+			}
+		}, 0f, 3f);
 	}
 
 	public void initRectangle(){
@@ -37,14 +45,19 @@ public class GameScreen extends State {
 		for (int i = 0; i < 5; i++)
 		{
 			int random = (int)(Math.random()*5);
-			G_ArrayRect.add(new Rectangle(160, i * 100, 160, 80, ArrayColor.get(random), true));
+			G_ArrayRect.add(new Rectangle(160, i * 80, 160, 80, ArrayColor.get(random), false));
 		}
 
-		G_ArrayRect.add(new Rectangle(120, 700, 90, 80, ArrayColor.get(1), true));
+	}
+
+	public void spawnRectangle(){
+		G_ArrayRect.add(new Rectangle(100, 700, 300, 80, Color.BLUE, false));
 	}
 	
 	public void handleInput() {
-
+		if(Gdx.input.justTouched()){
+			G_ArrayRect.get(G_ArrayRect.size()-1).setDansLeVide(true);
+		}
 	}
 	
 	public void update(float p_DelTem) {
