@@ -35,6 +35,10 @@ public class Rectangle {
 
     }
 
+    public void effondrement(){
+        y--;
+    }
+
     public int getX() {
         return x;
     }

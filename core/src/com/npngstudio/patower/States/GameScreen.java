@@ -76,11 +76,13 @@ public class GameScreen extends State {
 
 		if(!G_ArrayRect.get(G_ArrayRect.size()-1).isDansLeVide()){
 			for(Rectangle r : G_ArrayRect){
-				r.setY(r.getY()-1);
-				if(G_ArrayRect.get(1).getY() == 0) break;
+				r.effondrement();
+				if(G_ArrayRect.get(1).getY() == 0){
+					G_ArrayRect.remove(0);
+					break;
+				}
 			}
 
-			G_ArrayRect.remove(0);
 		}
 	}
 
