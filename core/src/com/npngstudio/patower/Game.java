@@ -3,25 +3,42 @@ package com.npngstudio.patower;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.npngstudio.patower.StatesManager.GSM;
 
 public class Game extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
+
+	/*public static IActivityRequestHandler myRequestHandler;
+	public static ActionResolver actionResolver;*/
+
+	public static final String TITLE = "Omo";
+	public static final int WIDTH = 480;
+	public static final int HEIGHT = 800;
+
+	private GSM gsm;
+	private SpriteBatch sb;
 	
-	@Override
+	/*public Omo(IActivityRequestHandler handler, ActionResolver action){
+		myRequestHandler = handler;
+		actionResolver = action;
+	}*/
+	
 	public void create () {
-		batch = new SpriteBatch();
-		//img = new Texture("tetedeQ.png");
+		
+		Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
+
+		sb = new SpriteBatch();
+		gsm = new GSM();
+
+		//gsm.push(new NPNGState(gsm));
 	}
 
-	@Override
+	
 	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
+		
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		//batch.draw(img, 0, 0, 600, 500);
-		batch.end();
+		
+		gsm.update(Gdx.graphics.getDeltaTime());
+		gsm.render(sb);
 	}
 }
