@@ -19,32 +19,53 @@ public class GameScreen extends State {
 	ShapeRenderer sr;
 	ArrayList<Rectangle> G_ArrayRect;
 	ArrayList<Color> ArrayColor = new ArrayList<Color>();
+	final int DROITE = 0;
+	final int GAUCHE = 1;
+	int RandDirection;
 
 	public GameScreen(GSM p_Gsm){
 		super(p_Gsm);
 		sr = new ShapeRenderer();
 		G_ArrayRect = new ArrayList<Rectangle>();
+		initColor();
 		initRectangle();
 	}
 
 	public void initRectangle(){
-		// Construction de base
+
+
+		for (int i = 0; i < 5; i++)
+		{
+			G_ArrayRect.add(new Rectangle(160, i * 80, 160, 80, getColorRand(), false));
+		}
+
+	}
+
+	public void initColor()
+	{
 		ArrayColor.add(Color.BLUE);
 		ArrayColor.add(Color.GREEN);
 		ArrayColor.add(Color.YELLOW);
 		ArrayColor.add(Color.RED);
 		ArrayColor.add(Color.MAGENTA);
+	}
 
-		for (int i = 0; i < 5; i++)
-		{
-			int random = (int)(Math.random()*5);
-			G_ArrayRect.add(new Rectangle(160, i * 80, 160, 80, ArrayColor.get(random), false));
-		}
-
+	public Color getColorRand()
+	{
+		int random = (int)(Math.random()*ArrayColor.size());
+		return ArrayColor.get(random);
 	}
 
 	public void spawnRectangle(){
-		G_ArrayRect.add(new Rectangle(100, 700, 300, 80, Color.BLUE, true));
+		RandDirection = (int)(Math.random()*2);
+		int randomWidth = 80 + (int)(Math.random()*80);
+
+		if(RandDirection == GAUCHE){
+			G_ArrayRect.add(new Rectangle(0 - randomWidth, 650, randomWidth, 80, getColorRand(), false));
+		}
+		else if(RandDirection == DROITE){
+			G_ArrayRect.add(new Rectangle( 480, 650, randomWidth, 80, getColorRand(), false));
+		}
 	}
 	
 	public void handleInput() {
@@ -62,7 +83,6 @@ public class GameScreen extends State {
 					&& G_ArrayRect.get(i).getX() + G_ArrayRect.get(i).getWidth() > G_ArrayRect.get(i-1).getX()
 					&& G_ArrayRect.get(i).getY() + G_ArrayRect.get(i).getHeight() > G_ArrayRect.get(i-1).getY())
 			{
-				System.out.println(G_ArrayRect.get(i).getWidth() + "    " + G_ArrayRect.size());
 				if(G_ArrayRect.get(i).getY() < G_ArrayRect.get(i-1).getY() + G_ArrayRect.get(i-1).getHeight())
 				{
 					G_ArrayRect.get(i).setDansLeVide(false);
@@ -74,7 +94,7 @@ public class GameScreen extends State {
 			spawnRectangle();
 		}
 
-		if(!G_ArrayRect.get(G_ArrayRect.size()-1).isDansLeVide()){
+		if(!G_ArrayRect.get(G_ArrayRect.size()-1).isDansLeVide() && G_ArrayRect.get(G_ArrayRect.size()-1).getY() < 650){
 			for(Rectangle r : G_ArrayRect){
 				r.setY(r.getY() - 1);
 				if(G_ArrayRect.get(1).getY() == 0){
@@ -83,6 +103,13 @@ public class GameScreen extends State {
 				}
 			}
 
+		}
+
+		if(RandDirection == GAUCHE){
+			G_ArrayRect.get(G_ArrayRect.size()-1).setX(G_ArrayRect.get(G_ArrayRect.size()-1).getX() + 1);
+		}
+		else if (RandDirection == DROITE){
+			G_ArrayRect.get(G_ArrayRect.size()-1).setX(G_ArrayRect.get(G_ArrayRect.size()-1).getX() - 1);
 		}
 	}
 
