@@ -2,6 +2,8 @@ package com.npngstudio.patower.Model;
 
 import com.badlogic.gdx.graphics.Color;
 
+import java.util.ArrayList;
+
 /**
  * Created by Anthony on 01/05/2015.
  */
@@ -21,12 +23,13 @@ public class Rectangle {
         this.color = p_color;
     }
 
-    public void update(){
-       /* if(y > 0)
+    public void update(ArrayList<Rectangle> p_ArrRec){
+        if(p_ArrRec.get(p_ArrRec.size()-1).y > p_ArrRec.get(p_ArrRec.size()-2).y)
         {
             this.y--;
+        }
 
-        }*/
+
     }
 
     public int getX() {

@@ -32,12 +32,13 @@ public class GameScreen extends State {
 		ArrayColor.add(Color.RED);
 		ArrayColor.add(Color.MAGENTA);
 
-		for (int i = 0; i <= 5; i++)
+		for (int i = 0; i < 5; i++)
 		{
 			int random = 0 + (int)(Math.random()*5);
 			G_ArrayRect.add(new Rectangle(160, i * 80, 160, 80, ArrayColor.get(random)));
 		}
 
+		G_ArrayRect.add(new Rectangle(160, 700, 160, 80, ArrayColor.get(1)));
 	}
 	
 	public void handleInput() {
@@ -59,7 +60,7 @@ public class GameScreen extends State {
 
 
 		for(Rectangle rec : G_ArrayRect) {
-			rec.update();
+			rec.update(G_ArrayRect);
 			sr.setColor(rec.getColor());
 			sr.rect(rec.getX(), rec.getY(), rec.getWidth(), rec.getHeight());
 		}
