@@ -1,7 +1,7 @@
 package com.npngstudio.patower.Model;
 
 /**
- * Created by Alex on 01/05/2015.
+ * Created by Alex on 01/05/2015..
  */
 public class Score {
 
