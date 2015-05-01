@@ -127,9 +127,15 @@ public class GameScreen extends State {
 
 		if(RandDirection == GAUCHE){
 			G_ArrayRect.get(G_ArrayRect.size()-1).setX(G_ArrayRect.get(G_ArrayRect.size()-1).getX() + vitesse);
+			if(G_ArrayRect.get(G_ArrayRect.size()-1).getX() > 480){
+				gsm.push(new MenuScreen(gsm));
+			}
 		}
 		else if (RandDirection == DROITE){
 			G_ArrayRect.get(G_ArrayRect.size()-1).setX(G_ArrayRect.get(G_ArrayRect.size()-1).getX() - vitesse);
+			if(G_ArrayRect.get(G_ArrayRect.size()-1).getX() + G_ArrayRect.get(G_ArrayRect.size()-1).getWidth() < 0){
+				gsm.push(new MenuScreen(gsm));
+			}
 		}
 	}
 
