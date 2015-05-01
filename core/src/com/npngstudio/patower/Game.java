@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.npngstudio.patower.States.GameScreen;
 import com.npngstudio.patower.States.MenuScreen;
+import com.npngstudio.patower.States.SplashScreen;
 import com.npngstudio.patower.StatesManager.GSM;
 
 public class Game extends ApplicationAdapter {
@@ -32,7 +33,7 @@ public class Game extends ApplicationAdapter {
 		g_SprBat = new SpriteBatch();
 		g_Gsm = new GSM();
 
-		g_Gsm.push(new MenuScreen(g_Gsm));
+		g_Gsm.push(new SplashScreen(g_Gsm));
 	}
 
 	
