@@ -29,7 +29,7 @@ public class Rectangle {
 
         if(dansLeVide) {
             if (y > 0) {
-                y--;
+                y -= 8;
             }
         }
 

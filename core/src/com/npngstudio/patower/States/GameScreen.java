@@ -107,10 +107,10 @@ public class GameScreen extends State {
 		}
 
 		if(RandDirection == GAUCHE){
-			G_ArrayRect.get(G_ArrayRect.size()-1).setX(G_ArrayRect.get(G_ArrayRect.size()-1).getX() + 1);
+			G_ArrayRect.get(G_ArrayRect.size()-1).setX(G_ArrayRect.get(G_ArrayRect.size()-1).getX() + 8);
 		}
 		else if (RandDirection == DROITE){
-			G_ArrayRect.get(G_ArrayRect.size()-1).setX(G_ArrayRect.get(G_ArrayRect.size()-1).getX() - 1);
+			G_ArrayRect.get(G_ArrayRect.size()-1).setX(G_ArrayRect.get(G_ArrayRect.size()-1).getX() - 8);
 		}
 	}
 
