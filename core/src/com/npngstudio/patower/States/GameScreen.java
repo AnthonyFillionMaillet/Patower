@@ -5,18 +5,19 @@ import com.npngstudio.patower.StatesManager.GSM;
 import com.npngstudio.patower.StatesManager.State;
 
 
-public class GameScreen extends State {
+public class GameCoreState extends State {
 	
 
-	public GameScreen(GSM p_Gsm){
+	public GameCoreState(GSM p_Gsm) {
 		super(p_Gsm);
 
 	}
-	
+
+	@Override
 	public void handleInput() {
 
 	}
-	
+
 	public void update(float p_DelTem) {
 		handleInput();
 	}
