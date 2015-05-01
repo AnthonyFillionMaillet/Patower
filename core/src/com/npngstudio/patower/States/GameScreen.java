@@ -23,7 +23,7 @@ public class GameScreen extends State {
 	final int GAUCHE = 1;
 	final int STOP = 2;
 	int RandDirection;
-	int vitesse = 16;
+	int vitesse = 8;
 	int g_Score = 0;
 
 	public GameScreen(GSM p_Gsm){
@@ -81,10 +81,6 @@ public class GameScreen extends State {
 	public void update(float p_DelTem) {
 		handleInput();
 
-		if(g_Score % 5 == 0 && g_Score != 0)
-		{
-			vitesse ++;
-		}
 
 		//INTERSECT
 		for(int i = 1; i < G_ArrayRect.size(); i++) {
@@ -121,8 +117,7 @@ public class GameScreen extends State {
 
 		// Quand le bloc touche le haut de la colonne
 		if(!G_ArrayRect.get(G_ArrayRect.size()-1).isDansLeVide() && G_ArrayRect.get(G_ArrayRect.size()-1).getY() < 650){
-			// On ajoute un point au score
-			g_Score++;
+
 			// Pour chaque rectangle
 			for(Rectangle r : G_ArrayRect){
 				// On fait descendre la colonne
@@ -132,6 +127,13 @@ public class GameScreen extends State {
 					// On fait descendre le reste de la colonne
 					for(int j = 2; j < G_ArrayRect.size(); j++){
 						G_ArrayRect.get(j).setY(G_ArrayRect.get(j).getY() - vitesse / 2);
+					}
+					// On ajoute un point au score
+					g_Score++;
+					System.out.println(vitesse);
+					if(g_Score % 5 == 0 && g_Score != 0)
+					{
+						vitesse ++;
 					}
 					// On supprime le bloc qui a disparu (de l'écran) de la liste
 					G_ArrayRect.remove(0);
