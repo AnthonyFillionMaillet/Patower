@@ -8,8 +8,8 @@ import com.npngstudio.patower.StatesManager.State;
 public class GameCoreState extends State {
 	
 
-	public GameCoreState(GSM gsm){
-		super(gsm);
+	public GameCoreState(GSM p_Gsm){
+		super(p_Gsm);
 
 	}
 	
@@ -17,17 +17,17 @@ public class GameCoreState extends State {
 
 	}
 	
-	public void update(float dt) {
+	public void update(float p_DelTem) {
 		handleInput();
 	}
 
-	public void render(SpriteBatch sb) {
-		
-		sb.setProjectionMatrix(cam.combined);
-		sb.begin();
+	public void render(SpriteBatch p_SprBat) {
 
-		
-		sb.end();
+		p_SprBat.setProjectionMatrix(cam.combined);
+		p_SprBat.begin();
+
+
+		p_SprBat.end();
 	}
 
 	

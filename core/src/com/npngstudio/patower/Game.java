@@ -15,8 +15,8 @@ public class Game extends ApplicationAdapter {
 	public static final int WIDTH = 480;
 	public static final int HEIGHT = 800;
 
-	private GSM gsm;
-	private SpriteBatch sb;
+	private GSM g_Gsm;
+	private SpriteBatch g_SprBat;
 	
 	/*public Omo(IActivityRequestHandler handler, ActionResolver action){
 		myRequestHandler = handler;
@@ -27,8 +27,8 @@ public class Game extends ApplicationAdapter {
 		
 		Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
 
-		sb = new SpriteBatch();
-		gsm = new GSM();
+		g_SprBat = new SpriteBatch();
+		g_Gsm = new GSM();
 
 		//gsm.push(new NPNGState(gsm));
 	}
@@ -37,8 +37,8 @@ public class Game extends ApplicationAdapter {
 	public void render () {
 		
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
-		gsm.update(Gdx.graphics.getDeltaTime());
-		gsm.render(sb);
+
+		g_Gsm.update(Gdx.graphics.getDeltaTime());
+		g_Gsm.render(g_SprBat);
 	}
 }
