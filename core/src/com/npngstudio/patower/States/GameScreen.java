@@ -34,11 +34,11 @@ public class GameScreen extends State {
 
 		for (int i = 0; i < 5; i++)
 		{
-			int random = 0 + (int)(Math.random()*5);
-			G_ArrayRect.add(new Rectangle(160, i * 80, 160, 80, ArrayColor.get(random)));
+			int random = (int)(Math.random()*5);
+			G_ArrayRect.add(new Rectangle(160, i * 100, 160, 80, ArrayColor.get(random), true));
 		}
 
-		G_ArrayRect.add(new Rectangle(160, 700, 160, 80, ArrayColor.get(1)));
+		G_ArrayRect.add(new Rectangle(160, 700, 160, 80, ArrayColor.get(1), true));
 	}
 	
 	public void handleInput() {
@@ -58,9 +58,16 @@ public class GameScreen extends State {
 
 		sr.begin(ShapeRenderer.ShapeType.Filled);
 
+		//INTERSECT
+		for(int i = 0; i < G_ArrayRect.size(); i++) {
+			if(G_ArrayRect.get(i-1) != null) {
+				if (G_ArrayRect.get(i).getX() + G_ArrayRect.get(i).getHeight() < G_ArrayRect.get(i-1).getX() + G_ArrayRect.get(i-1).getWidth() &&
+						)
+			}
+		}
 
 		for(Rectangle rec : G_ArrayRect) {
-			rec.update(G_ArrayRect);
+			rec.update();
 			sr.setColor(rec.getColor());
 			sr.rect(rec.getX(), rec.getY(), rec.getWidth(), rec.getHeight());
 		}
