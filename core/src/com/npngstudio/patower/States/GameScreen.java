@@ -10,6 +10,8 @@ import com.npngstudio.patower.StatesManager.State;
 
 import java.util.ArrayList;
 
+import sun.rmi.runtime.Log;
+
 
 public class GameScreen extends State {
 
@@ -38,7 +40,7 @@ public class GameScreen extends State {
 			G_ArrayRect.add(new Rectangle(160, i * 100, 160, 80, ArrayColor.get(random), true));
 		}
 
-		G_ArrayRect.add(new Rectangle(160, 700, 160, 80, ArrayColor.get(1), true));
+		G_ArrayRect.add(new Rectangle(120, 700, 90, 80, ArrayColor.get(1), true));
 	}
 	
 	public void handleInput() {
@@ -59,18 +61,18 @@ public class GameScreen extends State {
 		sr.begin(ShapeRenderer.ShapeType.Filled);
 
 		//INTERSECT
-		for(int i = 0; i < G_ArrayRect.size(); i++) {
-			if(G_ArrayRect.get(i-1) != null) {
-				if (G_ArrayRect.get(i).getX() + G_ArrayRect.get(i).getHeight() < G_ArrayRect.get(i-1).getX() + G_ArrayRect.get(i-1).getWidth()
-						&& G_ArrayRect.get(i).getX() + G_ArrayRect.get(i).getWidth() > G_ArrayRect.get(i-1).getX() + G_ArrayRect.get(i-1).getHeight()
-						&& G_ArrayRect.get(i).getY() + G_ArrayRect.get(i).getHeight() < G_ArrayRect.get(i-1).getY() + G_ArrayRect.get(i-1).getWidth())
+		for(int i = 1; i < G_ArrayRect.size(); i++) {
+				if (G_ArrayRect.get(i).getX() < G_ArrayRect.get(i-1).getX() + G_ArrayRect.get(i-1).getWidth()
+						&& G_ArrayRect.get(i).getX() + G_ArrayRect.get(i).getWidth() > G_ArrayRect.get(i-1).getX()
+						&& G_ArrayRect.get(i).getY() + G_ArrayRect.get(i).getHeight() > G_ArrayRect.get(i-1).getY())
 				{
-					if(G_ArrayRect.get(i).getY() + G_ArrayRect.get(i).getWidth() > G_ArrayRect.get(i-1).getY() + G_ArrayRect.get(i-1).getHeight())
+					System.out.println(G_ArrayRect.get(i).getWidth() + "    " + G_ArrayRect.size());
+					if(G_ArrayRect.get(i).getY() < G_ArrayRect.get(i-1).getY() + G_ArrayRect.get(i-1).getHeight())
 					{
 						G_ArrayRect.get(i).setDansLeVide(false);
 					}
 				}
-			}
+
 		}
 
 		for(Rectangle rec : G_ArrayRect) {
