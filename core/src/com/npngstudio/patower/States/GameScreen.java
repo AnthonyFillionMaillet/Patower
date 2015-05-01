@@ -1,6 +1,7 @@
 package com.npngstudio.patower.States;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -23,7 +24,7 @@ public class GameScreen extends State {
 	final int GAUCHE = 1;
 	final int STOP = 2;
 	int RandDirection;
-	int vitesse = 8;
+	int vitesse = 12;
 	int g_Score = 0;
 
 	public GameScreen(GSM p_Gsm){
@@ -32,6 +33,25 @@ public class GameScreen extends State {
 		G_ArrayRect = new ArrayList<Rectangle>();
 		initColor();
 		initRectangle();
+
+		/*
+		//get a preferences instance
+		Preferences prefs = Gdx.app.getPreferences("My Preferences");
+		//put some Integer
+		prefs.putInteger("score", 99);
+
+		prefs.putInteger("score", 82);
+
+		//persist preferences
+		prefs.flush();
+
+		//get Integer from preferences, 0 is the default value.
+		prefs.getInteger("score");*/
+
+
+
+
+
 	}
 
 	// Génération de la colonne de base
