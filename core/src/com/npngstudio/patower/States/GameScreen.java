@@ -80,14 +80,28 @@ public class GameScreen extends State {
 
 		//INTERSECT
 		for(int i = 1; i < G_ArrayRect.size(); i++) {
-			if (G_ArrayRect.get(i).getX() < G_ArrayRect.get(i-1).getX() + G_ArrayRect.get(i-1).getWidth()
-					&& G_ArrayRect.get(i).getX() + G_ArrayRect.get(i).getWidth() > G_ArrayRect.get(i-1).getX()
-					&& G_ArrayRect.get(i).getY() + G_ArrayRect.get(i).getHeight() > G_ArrayRect.get(i-1).getY())
+			if (G_ArrayRect.get(i).getX() <= G_ArrayRect.get(i-1).getX() + G_ArrayRect.get(i-1).getWidth()
+					&& G_ArrayRect.get(i).getX() + G_ArrayRect.get(i).getWidth() >= G_ArrayRect.get(i-1).getX()
+					&& G_ArrayRect.get(i).getY() + G_ArrayRect.get(i).getHeight() >= G_ArrayRect.get(i-1).getY())
 			{
 				if(G_ArrayRect.get(i).getY() < G_ArrayRect.get(i-1).getY() + G_ArrayRect.get(i-1).getHeight())
 				{
 					G_ArrayRect.get(i).setDansLeVide(false);
 					G_ArrayRect.get(G_ArrayRect.size()-1).setY(G_ArrayRect.get(i-1).getY() + G_ArrayRect.get(i-1).getHeight());
+				}
+			}
+
+			//SI LA PIECE TOMBE A COTE = LOSE
+			if((G_ArrayRect.get(i).getX() > G_ArrayRect.get(i-1).getX() + G_ArrayRect.get(i-1).getWidth()
+				&& G_ArrayRect.get(i).getX() + G_ArrayRect.get(i).getWidth() >= G_ArrayRect.get(i-1).getX()
+				&& G_ArrayRect.get(i).getY() + G_ArrayRect.get(i).getHeight() >= G_ArrayRect.get(i-1).getY()) ||
+				(G_ArrayRect.get(i).getX() <= G_ArrayRect.get(i-1).getX() + G_ArrayRect.get(i-1).getWidth()
+				&& G_ArrayRect.get(i).getX() + G_ArrayRect.get(i).getWidth() < G_ArrayRect.get(i-1).getX()
+				&& G_ArrayRect.get(i).getY() + G_ArrayRect.get(i).getHeight() >= G_ArrayRect.get(i-1).getY()))
+			{
+				if(G_ArrayRect.get(i).getY() < G_ArrayRect.get(i-1).getY() + G_ArrayRect.get(i-1).getHeight())
+				{
+					gsm.push(new MenuScreen(gsm));
 				}
 			}
 		}
