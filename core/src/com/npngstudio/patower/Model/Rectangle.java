@@ -55,8 +55,20 @@ public class Rectangle {
         return color;
     }
 
-    public void setDansLeVide(boolean dansLeVide) {
-        this.dansLeVide = dansLeVide;
+    public boolean isDansLeVide(){
+        return dansLeVide;
+    }
+
+    public void setX(int p_x){
+        this.x = p_x;
+    }
+
+    public void setY(int p_y){
+        this.y = p_y;
+    }
+
+    public void setDansLeVide(boolean p_dansLeVide) {
+        this.dansLeVide = p_dansLeVide;
     }
 
 

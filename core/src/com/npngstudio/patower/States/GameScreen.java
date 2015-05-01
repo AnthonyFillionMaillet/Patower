@@ -24,13 +24,6 @@ public class GameScreen extends State {
 		sr = new ShapeRenderer();
 		G_ArrayRect = new ArrayList<Rectangle>();
 		initRectangle();
-
-		Timer.schedule(new Timer.Task() {
-			@Override
-			public void run() {
-				spawnRectangle();
-			}
-		}, 0f, 3f);
 	}
 
 	public void initRectangle(){
@@ -51,7 +44,7 @@ public class GameScreen extends State {
 	}
 
 	public void spawnRectangle(){
-		G_ArrayRect.add(new Rectangle(100, 700, 300, 80, Color.BLUE, false));
+		G_ArrayRect.add(new Rectangle(100, 700, 300, 80, Color.BLUE, true));
 	}
 	
 	public void handleInput() {
@@ -63,6 +56,32 @@ public class GameScreen extends State {
 	public void update(float p_DelTem) {
 		handleInput();
 
+		//INTERSECT
+		for(int i = 1; i < G_ArrayRect.size(); i++) {
+			if (G_ArrayRect.get(i).getX() < G_ArrayRect.get(i-1).getX() + G_ArrayRect.get(i-1).getWidth()
+					&& G_ArrayRect.get(i).getX() + G_ArrayRect.get(i).getWidth() > G_ArrayRect.get(i-1).getX()
+					&& G_ArrayRect.get(i).getY() + G_ArrayRect.get(i).getHeight() > G_ArrayRect.get(i-1).getY())
+			{
+				System.out.println(G_ArrayRect.get(i).getWidth() + "    " + G_ArrayRect.size());
+				if(G_ArrayRect.get(i).getY() < G_ArrayRect.get(i-1).getY() + G_ArrayRect.get(i-1).getHeight())
+				{
+					G_ArrayRect.get(i).setDansLeVide(false);
+				}
+			}
+		}
+
+		if(G_ArrayRect.size() == 5){
+			spawnRectangle();
+		}
+
+		if(!G_ArrayRect.get(G_ArrayRect.size()-1).isDansLeVide()){
+			for(Rectangle r : G_ArrayRect){
+				r.setY(r.getY()-1);
+				if(G_ArrayRect.get(1).getY() == 0) break;
+			}
+
+			G_ArrayRect.remove(0);
+		}
 	}
 
 	public void render(SpriteBatch p_SprBat) {
@@ -73,20 +92,7 @@ public class GameScreen extends State {
 
 		sr.begin(ShapeRenderer.ShapeType.Filled);
 
-		//INTERSECT
-		for(int i = 1; i < G_ArrayRect.size(); i++) {
-				if (G_ArrayRect.get(i).getX() < G_ArrayRect.get(i-1).getX() + G_ArrayRect.get(i-1).getWidth()
-						&& G_ArrayRect.get(i).getX() + G_ArrayRect.get(i).getWidth() > G_ArrayRect.get(i-1).getX()
-						&& G_ArrayRect.get(i).getY() + G_ArrayRect.get(i).getHeight() > G_ArrayRect.get(i-1).getY())
-				{
-					System.out.println(G_ArrayRect.get(i).getWidth() + "    " + G_ArrayRect.size());
-					if(G_ArrayRect.get(i).getY() < G_ArrayRect.get(i-1).getY() + G_ArrayRect.get(i-1).getHeight())
-					{
-						G_ArrayRect.get(i).setDansLeVide(false);
-					}
-				}
 
-		}
 
 		for(Rectangle rec : G_ArrayRect) {
 			rec.update();
