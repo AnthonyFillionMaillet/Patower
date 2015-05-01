@@ -123,18 +123,18 @@ public class GameScreen extends State {
 				// On fait descendre la colonne
 				r.setY(r.getY() - vitesse / 2);
 				// Quand le dernier bloc à disparu de l'écran
-				if(G_ArrayRect.get(1).getY() == 0){
+				if(G_ArrayRect.get(1).getY() <= 0){
 					// On fait descendre le reste de la colonne
 					for(int j = 2; j < G_ArrayRect.size(); j++){
 						G_ArrayRect.get(j).setY(G_ArrayRect.get(j).getY() - vitesse / 2);
 					}
 					// On ajoute un point au score
 					g_Score++;
-					System.out.println(vitesse);
 					if(g_Score % 5 == 0 && g_Score != 0)
 					{
 						vitesse ++;
 					}
+					System.out.println("Vitesse : " + vitesse + " Score : "  + g_Score);
 					// On supprime le bloc qui a disparu (de l'écran) de la liste
 					G_ArrayRect.remove(0);
 					// Stop la descente de la colonne
