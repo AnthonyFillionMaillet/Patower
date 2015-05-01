@@ -38,7 +38,7 @@ public class GameScreen extends State {
 	public void render(SpriteBatch p_SprBat) {
 
 		p_SprBat.setProjectionMatrix(cam.combined);
-
+		sr.setProjectionMatrix(cam.combined);
 
 
 		sr.begin(ShapeRenderer.ShapeType.Filled);
@@ -54,6 +54,7 @@ public class GameScreen extends State {
 
 
 		p_SprBat.end();
+
 	}
 
 	
