@@ -87,6 +87,8 @@ public class GameScreen extends State {
 				if(G_ArrayRect.get(i).getY() < G_ArrayRect.get(i-1).getY() + G_ArrayRect.get(i-1).getHeight())
 				{
 					G_ArrayRect.get(i).setDansLeVide(false);
+					G_ArrayRect.get(G_ArrayRect.size()-1).setY(G_ArrayRect.get(i-1).getY() + G_ArrayRect.get(i-1).getHeight());
+					break;
 				}
 			}
 		}
@@ -97,7 +99,7 @@ public class GameScreen extends State {
 
 		if(!G_ArrayRect.get(G_ArrayRect.size()-1).isDansLeVide() && G_ArrayRect.get(G_ArrayRect.size()-1).getY() < 650){
 			for(Rectangle r : G_ArrayRect){
-				r.setY(r.getY() - 1);
+				r.setY(r.getY() - 4);
 				if(G_ArrayRect.get(1).getY() == 0){
 					G_ArrayRect.remove(0);
 					break;
