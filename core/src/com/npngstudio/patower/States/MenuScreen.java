@@ -1,6 +1,7 @@
 package com.npngstudio.patower.States;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.npngstudio.patower.Model.Rectangle;
@@ -14,8 +15,16 @@ import java.util.ArrayList;
  */
 public class MenuScreen extends State {
 
+    private static int mu = 0;
+
     public MenuScreen(GSM p_Gsm){
         super(p_Gsm);
+        Music main = Gdx.audio.newMusic(Gdx.files.internal("data/mainmusic.mp3"));
+        if (mu == 0) {
+            main.play();
+            main.setLooping(true);
+            mu++;
+        }
     }
 
     public void handleInput() {
