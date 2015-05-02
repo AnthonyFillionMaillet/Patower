@@ -50,7 +50,7 @@ public class SplashScreen extends State {
         shapeRenderer.rect(0, 0, 480, 800);
         shapeRenderer.end();
 
-        if(alpha < 0.9f) alpha += 0.006f;
+        if(alpha < 0.9f) alpha += 0.007f;
         else alpha = 1.0f;
 
         sb.begin();
