@@ -19,10 +19,10 @@ public class MenuScreen extends State {
 
     public MenuScreen(GSM p_Gsm){
         super(p_Gsm);
-        Music main = Gdx.audio.newMusic(Gdx.files.internal("data/mainmusic.wav"));
+        //Music main = Gdx.audio.newMusic(Gdx.files.internal("data/mainmusic.wav"));
         if (mu == 0) {
-            main.play();
-            main.setLooping(true);
+            //main.play();
+            //main.setLooping(true);
             mu++;
         }
     }

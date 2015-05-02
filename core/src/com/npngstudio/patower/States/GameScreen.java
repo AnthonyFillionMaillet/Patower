@@ -2,6 +2,8 @@ package com.npngstudio.patower.States;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Timer;
@@ -25,11 +27,15 @@ public class GameScreen extends State {
 	int RandDirection;
 	int vitesse = 8;
 	int g_Score = 0;
+	int storeRandomColor = 0;
+	int random = 1;
+	private BitmapFont bit_score;
 
 	public GameScreen(GSM p_Gsm){
 		super(p_Gsm);
 		sr = new ShapeRenderer();
 		G_ArrayRect = new ArrayList<Rectangle>();
+		bit_score = new BitmapFont(Gdx.files.internal("data/text.fnt"), false);
 		initColor();
 		initRectangle();
 	}
@@ -44,17 +50,21 @@ public class GameScreen extends State {
 
 	public void initColor()
 	{
-		ArrayColor.add(Color.BLUE);
-		ArrayColor.add(Color.GREEN);
-		ArrayColor.add(Color.YELLOW);
-		ArrayColor.add(Color.RED);
-		ArrayColor.add(Color.MAGENTA);
+		ArrayColor.add(new Color(Color.rgb888(255, 108, 180)));
+		ArrayColor.add(new Color(Color.rgb888(255, 232, 119)));
+		ArrayColor.add(new Color(Color.rgb888(245, 255, 125)));
+		ArrayColor.add(new Color(Color.rgb888(198, 255, 142)));
+		ArrayColor.add(new Color(Color.rgb888(187, 255, 255)));
+
 	}
 
 	// Permet de récupérer une couleur aléatoirement dans la liste des couleurs
 	public Color getColorRand()
 	{
-		int random = (int)(Math.random()*ArrayColor.size());
+		storeRandomColor = random;
+		while(random == storeRandomColor) {
+			random = (int) (Math.random() * ArrayColor.size());
+		}
 		return ArrayColor.get(random);
 	}
 
@@ -63,10 +73,10 @@ public class GameScreen extends State {
 		int randomWidth = 80 + (int)(Math.random()*80);
 
 		if(RandDirection == GAUCHE){
-			G_ArrayRect.add(new Rectangle(0 - randomWidth, 650, randomWidth, 80, getColorRand(), false));
+			G_ArrayRect.add(new Rectangle(0 - randomWidth, 550, randomWidth, 80, getColorRand(), false));
 		}
 		else if(RandDirection == DROITE){
-			G_ArrayRect.add(new Rectangle( 480, 650, randomWidth, 80, getColorRand(), false));
+			G_ArrayRect.add(new Rectangle( 480, 550, randomWidth, 80, getColorRand(), false));
 		}
 	}
 	
@@ -81,11 +91,10 @@ public class GameScreen extends State {
 	public void update(float p_DelTem) {
 		handleInput();
 
-
 		//INTERSECT
 		for(int i = 1; i < G_ArrayRect.size(); i++) {
-			if (G_ArrayRect.get(i).getX() <= G_ArrayRect.get(i-1).getX() + G_ArrayRect.get(i-1).getWidth()
-					&& G_ArrayRect.get(i).getX() + G_ArrayRect.get(i).getWidth() >= G_ArrayRect.get(i-1).getX()
+			if (G_ArrayRect.get(i).getX() < G_ArrayRect.get(i-1).getX() + G_ArrayRect.get(i-1).getWidth()
+					&& G_ArrayRect.get(i).getX() + G_ArrayRect.get(i).getWidth() > G_ArrayRect.get(i-1).getX()
 					&& G_ArrayRect.get(i).getY() + G_ArrayRect.get(i).getHeight() >= G_ArrayRect.get(i-1).getY())
 			{
 				if(G_ArrayRect.get(i).getY() < G_ArrayRect.get(i-1).getY() + G_ArrayRect.get(i-1).getHeight())
@@ -96,11 +105,11 @@ public class GameScreen extends State {
 			}
 
 			//SI LA PIECE TOMBE A COTE = LOSE
-			if((G_ArrayRect.get(i).getX() > G_ArrayRect.get(i-1).getX() + G_ArrayRect.get(i-1).getWidth()
-				&& G_ArrayRect.get(i).getX() + G_ArrayRect.get(i).getWidth() >= G_ArrayRect.get(i-1).getX()
+			if((G_ArrayRect.get(i).getX() >= G_ArrayRect.get(i-1).getX() + G_ArrayRect.get(i-1).getWidth()
+				&& G_ArrayRect.get(i).getX() + G_ArrayRect.get(i).getWidth() > G_ArrayRect.get(i-1).getX()
 				&& G_ArrayRect.get(i).getY() + G_ArrayRect.get(i).getHeight() >= G_ArrayRect.get(i-1).getY()) ||
-				(G_ArrayRect.get(i).getX() <= G_ArrayRect.get(i-1).getX() + G_ArrayRect.get(i-1).getWidth()
-				&& G_ArrayRect.get(i).getX() + G_ArrayRect.get(i).getWidth() < G_ArrayRect.get(i-1).getX()
+				(G_ArrayRect.get(i).getX() < G_ArrayRect.get(i-1).getX() + G_ArrayRect.get(i-1).getWidth()
+				&& G_ArrayRect.get(i).getX() + G_ArrayRect.get(i).getWidth() <= G_ArrayRect.get(i-1).getX()
 				&& G_ArrayRect.get(i).getY() + G_ArrayRect.get(i).getHeight() >= G_ArrayRect.get(i-1).getY()))
 			{
 				if(G_ArrayRect.get(i).getY() < G_ArrayRect.get(i-1).getY() + G_ArrayRect.get(i-1).getHeight())
@@ -116,7 +125,7 @@ public class GameScreen extends State {
 		}
 
 		// Quand le bloc touche le haut de la colonne
-		if(!G_ArrayRect.get(G_ArrayRect.size()-1).isDansLeVide() && G_ArrayRect.get(G_ArrayRect.size()-1).getY() < 650){
+		if(!G_ArrayRect.get(G_ArrayRect.size()-1).isDansLeVide() && G_ArrayRect.get(G_ArrayRect.size()-1).getY() < 550){
 
 			// Pour chaque rectangle
 			for(Rectangle r : G_ArrayRect){
@@ -134,7 +143,7 @@ public class GameScreen extends State {
 					{
 						vitesse ++;
 					}
-					System.out.println("Vitesse : " + vitesse + " Score : "  + g_Score);
+					//System.out.println("Vitesse : " + vitesse + " Score : "  + g_Score);
 					// On supprime le bloc qui a disparu (de l'écran) de la liste
 					G_ArrayRect.remove(0);
 					// Stop la descente de la colonne
@@ -165,6 +174,8 @@ public class GameScreen extends State {
 
 	public void render(SpriteBatch p_SprBat) {
 
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
 		p_SprBat.setProjectionMatrix(cam.combined);
 		sr.setProjectionMatrix(cam.combined);
 		sr.begin(ShapeRenderer.ShapeType.Filled);
@@ -173,10 +184,22 @@ public class GameScreen extends State {
 			rec.update();
 			sr.setColor(rec.getColor());
 			sr.rect(rec.getX(), rec.getY(), rec.getWidth(), rec.getHeight());
+			sr.setColor(Color.BLACK);
+			sr.rect(rec.getX(), rec.getY() - 2, rec.getWidth(), 2);
+			sr.rect(rec.getX(), rec.getY(), 2, rec.getHeight());
+			sr.rect(rec.getX(), rec.getY() + rec.getHeight() - 2, rec.getWidth(), 2);
+			sr.rect(rec.getX() + rec.getWidth() - 2, rec.getY(), 2, rec.getHeight());
 		}
 
 		sr.end();
+
 		p_SprBat.begin();
+		if(g_Score < 10)
+			bit_score.draw(p_SprBat, ""+g_Score, 232, 730);
+		else if(g_Score < 100)
+			bit_score.draw(p_SprBat, ""+g_Score, 212, 730);
+		else
+			bit_score.draw(p_SprBat, ""+g_Score, 192, 730);
 		p_SprBat.end();
 
 	}
