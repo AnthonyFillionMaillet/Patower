@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Timer;
+import com.npngstudio.patower.Game;
 import com.npngstudio.patower.StatesManager.GSM;
 import com.npngstudio.patower.StatesManager.State;
 
@@ -21,7 +22,6 @@ public class SplashScreen extends State {
 
     private Texture background;
     private ShapeRenderer shapeRenderer;
-    private BitmapFont font;
     private float alpha;
     private boolean fadeIn = true;
     private boolean fadeOut = false;
@@ -29,8 +29,9 @@ public class SplashScreen extends State {
 
     public SplashScreen(GSM p_Gsm){
         super(p_Gsm);
+        Game.myRequestHandler.showAds(false);
+
         shapeRenderer = new ShapeRenderer();
-        //font = new BitmapFont(Gdx.files.internal("data/text2.fnt"));
         alpha = 0.0f;
         splash = Gdx.audio.newMusic(Gdx.files.internal("data/splash1.ogg"));
         background = new Texture(Gdx.files.internal("data/test2.png"));
@@ -42,6 +43,7 @@ public class SplashScreen extends State {
                 fadeOut();
             }
         }, 3);
+
     }
 
     public void handleInput() {
@@ -49,8 +51,6 @@ public class SplashScreen extends State {
 
     public void fadeOut(){
         fadeOut = true;
-       /* splash.stop();
-        gsm.push(new MenuScreen(gsm));*/
     }
 
     public void update(float dt) {
@@ -94,8 +94,6 @@ public class SplashScreen extends State {
 
 
         sb.begin();
-        /*font.draw(sb, "NPNG", 140, 580);
-        font.draw(sb, "STUDIO", 85, 300);*/
         sb.setColor(1.0f, 1.0f, 1.0f, alpha);
         sb.draw(background, 0, 0, 480, 800);
         sb.end();

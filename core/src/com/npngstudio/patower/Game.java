@@ -4,6 +4,8 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.npngstudio.patower.GoogleServices.ActionResolver;
+import com.npngstudio.patower.GoogleServices.IActivityRequestHandler;
 import com.npngstudio.patower.States.GameScreen;
 import com.npngstudio.patower.States.MenuScreen;
 import com.npngstudio.patower.States.SplashScreen;
@@ -11,8 +13,8 @@ import com.npngstudio.patower.StatesManager.GSM;
 
 public class Game extends ApplicationAdapter {
 
-	/*public static IActivityRequestHandler myRequestHandler;
-	public static ActionResolver actionResolver;*/
+	public static IActivityRequestHandler myRequestHandler;
+	public static ActionResolver actionResolver;
 
 	public static final String TITLE = "Omo";
 	public static final int WIDTH = 480;
@@ -21,10 +23,10 @@ public class Game extends ApplicationAdapter {
 	private GSM g_Gsm;
 	private SpriteBatch g_SprBat;
 	
-	/*public Omo(IActivityRequestHandler handler, ActionResolver action){
+	public Game(IActivityRequestHandler handler, ActionResolver action){
 		myRequestHandler = handler;
 		actionResolver = action;
-	}*/
+	}
 	
 	public void create () {
 		

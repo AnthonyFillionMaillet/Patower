@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Timer;
+import com.npngstudio.patower.Game;
 import com.npngstudio.patower.Model.Rectangle;
 import com.npngstudio.patower.StatesManager.GSM;
 import com.npngstudio.patower.StatesManager.State;
@@ -33,6 +34,7 @@ public class GameScreen extends State {
 
 	public GameScreen(GSM p_Gsm){
 		super(p_Gsm);
+		Game.myRequestHandler.showAds(true);
 		sr = new ShapeRenderer();
 		G_ArrayRect = new ArrayList<Rectangle>();
 		bit_score = new BitmapFont(Gdx.files.internal("data/text.fnt"), false);

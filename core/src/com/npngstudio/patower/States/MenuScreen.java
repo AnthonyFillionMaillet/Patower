@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.npngstudio.patower.Game;
 import com.npngstudio.patower.Model.Rectangle;
 import com.npngstudio.patower.StatesManager.GSM;
 import com.npngstudio.patower.StatesManager.State;
@@ -19,12 +20,13 @@ public class MenuScreen extends State {
 
     public MenuScreen(GSM p_Gsm){
         super(p_Gsm);
+        Game.myRequestHandler.showAds(true);
         //Music main = Gdx.audio.newMusic(Gdx.files.internal("data/mainmusic.wav"));
-        if (mu == 0) {
-            //main.play();
-            //main.setLooping(true);
+        /*if (mu == 0) {
+            main.play();
+            main.setLooping(true);
             mu++;
-        }
+        }*/
     }
 
     public void handleInput() {

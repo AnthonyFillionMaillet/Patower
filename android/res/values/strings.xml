@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <string name="app_id">261162767611</string>
+    <string name="number_guesses_leaderboard">CgkI-6mO9MwHEAIQAA</string>
     <string name="app_name">Patower</string>
-
 </resources>
