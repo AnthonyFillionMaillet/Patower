@@ -13,6 +13,7 @@ import com.npngstudio.patower.StatesManager.GSM;
 import com.npngstudio.patower.StatesManager.State;
 
 import java.util.ArrayList;
+import com.badlogic.gdx.Preferences;
 
 import sun.rmi.runtime.Log;
 
@@ -32,6 +33,10 @@ public class GameScreen extends State {
 	int random = 1;
 	private BitmapFont bit_score;
 
+	private static final String PREFS_NAME = "Patower";
+	private static final String PREFS_SCORE = "score";
+	private Preferences preferences = Gdx.app.getPreferences(PREFS_NAME);
+
 	public GameScreen(GSM p_Gsm){
 		super(p_Gsm);
 		Game.myRequestHandler.showAds(true);
@@ -47,6 +52,16 @@ public class GameScreen extends State {
 		for (int i = 0; i < 5; i++)
 		{
 			G_ArrayRect.add(new Rectangle(160, i * 80, 160, 80, getColorRand(), false));
+		}
+	}
+
+
+	public void saveScore()
+	{
+		// Sauvegarde le score seulement s'il est plus élevé que le score enrregistré
+		if(preferences.getInteger(PREFS_SCORE) < g_Score){
+			preferences.putInteger(PREFS_SCORE, g_Score);
+			preferences.flush();
 		}
 	}
 
@@ -116,6 +131,7 @@ public class GameScreen extends State {
 			{
 				if(G_ArrayRect.get(i).getY() < G_ArrayRect.get(i-1).getY() + G_ArrayRect.get(i-1).getHeight())
 				{
+					saveScore();
 					gsm.push(new MenuScreen(gsm));
 				}
 			}
